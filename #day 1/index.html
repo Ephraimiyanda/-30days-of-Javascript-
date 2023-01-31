@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sounds</title>
+</head>
+<body>
+   <div class="divers">
+    <div data-key="65" class="first"><kbd>A</kbd><span class="sound">6000de</span></div>
+    <div  data-key="83"><kbd>S</kbd><span class="sound">rich flex</span></div>
+    <div  data-key="68"><kbd>D</kbd><span class="sound">her loss</span></div>
+    <div data-key="70"><kbd>F</kbd><span class="sound">players</span></div>
+    <div  data-key="71"><kbd>G</kbd><span class="sound">rapstar</span></div>
+    <div  data-key="72"><kbd>H</kbd><span class="sound"> bad habit</span></div>
+    <div  data-key="74"><kbd>J</kbd><span class="sound">drummer</span></div>
+    <div  data-key="75"><kbd>K</kbd><span class="sound">we paid</span></div>
+    <div  data-key="76"><kbd>L</kbd><span class="sound"> wavers</span></div>
+   </div>
+   <audio data-key="65" src="./sounds/boom.wav"></audio>
+   <audio data-key="83" src="./sounds/clap.wav"></audio>
+   <audio data-key="68" src="./sounds/hihat.wav"></audio>
+   <audio data-key="70" src="./sounds/kick.wav"></audio>
+   <audio data-key="71" src="./sounds/openhat.wav"></audio>
+   <audio data-key="72" src="./sounds/snare.wav"></audio>
+   <audio data-key="74" src="./sounds/snare.wav"></audio>
+   <audio data-key="75" src="./sounds/tink.wav"></audio>
+   <audio data-key="76" src="./sounds/tom.wav"></audio>
+    <style>
+        body{
+            background-image: url(./images/bg-hero-mobile.svg);
+        }
+        .divers{
+            display: flex;
+            border: none;
+            background: none;
+            
+        }
+        kbd{
+            color: red;
+            font-size: x-large;
+        }
+        div{
+            background-color: rgb(200, 236, 236);
+         border: 2px solid yellow;
+            height: 80px;
+            width: 100px;
+            text-align: center;
+            margin-right: 20px;
+        margin-top: 100px;
+        float:right;
+        transition: all 0.07s;
+        }
+        .first{
+            margin-left: -1150px;
+        }
+        span{
+            color: rgb(151, 151, 78);
+           float: right;
+           margin-top: 40px;
+           margin-left: -70px;
+           margin-right: 25px;
+          
+        }
+        .playing{
+            transform: scale(1.1);
+            border-color: black;
+            background-color: aqua;
+        }
+    </style>
+    <script>
+     window.addEventListener("keydown", function(e){
+
+        const audio =document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+     if(!audio)return;
+     audio.currentTime = 0;
+     audio.play();
+     key.classList.add('playing');
+     key.classList.remove('playing');
+     key.classList.toggle('playing');
+     });
+
+     function removeTransition(e){
+     if(e.propertyName !=='transform')return;
+     this.classList.remove('playing');
+     }
+     const keys = document.querySelectorAll('div');
+     keys.forEach(key=> key.addEventListener("transitionend", removeTransition));
+
+    </script>
+</body>
+</html>
